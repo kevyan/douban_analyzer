@@ -2,8 +2,14 @@ from bs4 import BeautifulSoup
 import requests
 
 baseUrl = 'https://movie.douban.com/subject/27615233/comments?start='
-endUrl = '&limit=20'
-startArr = ["1", "21", "41", "61", "81", "101"]
+endUrl = '&limit=50'
+
+startArr = []
+# startArr = ["1", "21", "41", "61", "81", "101"]
+for i in range(2):
+    start = 1 + (i * 50)
+    startArr.append(str(start))
+
 urlArr = []
 
 # def getUrl():
@@ -14,10 +20,8 @@ print(urlArr)
 
 for i in range(len(startArr)):
     src = requests.get(urlArr[i]).text
-
     soup = BeautifulSoup(src, 'lxml')
-
-    infolist = []
+    # infolist = []
 
     obj = soup.find_all('span', class_='rating')
     for element in obj:
