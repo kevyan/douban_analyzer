@@ -7,12 +7,12 @@ startArr = ["1", "21", "41", "61", "81", "101"]
 urlArr = []
 
 # def getUrl():
-for i in range(6):
+for i in range(len(startArr)):
     url = baseUrl + startArr[i] + endUrl
     urlArr.append(url)
 print(urlArr)
 
-for i in range(6):
+for i in range(len(startArr)):
     src = requests.get(urlArr[i]).text
 
     soup = BeautifulSoup(src, 'lxml')
