@@ -1,13 +1,26 @@
 from bs4 import BeautifulSoup
 import requests
 
-src = requests.get('https://movie.douban.com/subject/27615233/').text
+baseUrl = 'https://movie.douban.com/subject/27615233/comments?start='
+endUrl = '&limit=20'
+startArr = ["1", "21", "41", "61", "81", "101"]
+urlArr = []
 
-soup = BeautifulSoup(src, 'lxml')
+# def getUrl():
+for i in range(6):
+    url = baseUrl + startArr[i] + endUrl
+    urlArr.append(url)
+print(urlArr)
 
-infolist = []
+for i in range(6):
+    src = requests.get(urlArr[i]).text
 
-for div in soup.find_all('div', class_='info'):
-    infolist.append(div.prettify())
-    print(infolist)
-    
+    soup = BeautifulSoup(src, 'lxml')
+
+    infolist = []
+
+    obj = soup.find_all('span', class_='rating')
+    for element in obj:
+        print(element)
+
+
